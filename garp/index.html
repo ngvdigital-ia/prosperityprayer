@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guardian Angel Reconnection Prayer</title>
+
+<link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
+<link rel="preconnect" href="https://scripts.converteai.net" crossorigin>
+<link rel="preconnect" href="https://cdn.converteai.net" crossorigin>
+<link rel="preconnect" href="https://api.vturb.com.br" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #000000;
+}
+
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 120px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.text {
+    text-align: center;
+    padding: 25px 15px;
+    font-weight: 700;
+    font-size: 24px;
+    color: #000000;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.text span[style*="color: red"] {
+    color: #dc143c !important;
+}
+
+.live-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 25px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+    border: none;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+}
+
+.live-dot {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.video-container {
+    margin: 30px 0;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    background: transparent;
+}
+
+.disclaimer {
+    background: #f5f5f5;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+    padding: 30px 20px;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 100vw;
+        padding: 15px 10px;
+    }
+
+    .text {
+        font-size: 20px;
+        padding: 20px 15px;
+        margin: 0 5px 10px 5px;
+    }
+
+    .live-status {
+        font-size: 16px;
+        padding: 12px 20px;
+        gap: 8px;
+        margin: 0 5px 30px 5px;
+    }
+
+    .live-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .video-container {
+        margin: 20px 5px;
+    }
+
+    .disclaimer {
+        font-size: 11px;
+        padding: 25px 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .text {
+        font-size: 18px;
+        padding: 15px 12px;
+    }
+
+    .live-status {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .container {
+        padding: 10px 8px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .text {
+        font-size: 16px;
+        padding: 12px 10px;
+    }
+
+    .live-status {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="main-wrapper">
+    <div class="container">
+        <div class="text">
+            Today, <span style="color: red;"><span id="date"></span></span> it's the last chance God gives you to have his blessing
+        </div>
+
+        <div class="live-status">
+            <div class="live-dot"></div>
+            <span id="numero-pessoas">27,827 people are watching now!</span>
+        </div>
+
+        <div class="video-container" id="video-container">
+            <!-- SUBSTITUIR PELO PLAYER VTURB -->
+            <div id="vid_PLACEHOLDER" style="position:relative;width:100%;padding:56.25% 0 0;"></div>
+            <script src="https://scripts.converteai.net/PLACEHOLDER/players/PLACEHOLDER.js" async></script>
+        </div>
+    </div>
+</div>
+
+<div class="disclaimer">
+    This site is not affiliated, endorsed or sponsored by Facebook or Google. Facebook and Google are registered trademarks of their respective owners. All testimonials are from real people, but results may vary.
+</div>
+
+<script>
+function setCurrentDate() {
+    const today = new Date();
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
+    document.getElementById('date').textContent = formattedDate;
+}
+setCurrentDate();
+
+let baseViewers = 27827;
+let currentViewers = baseViewers;
+let lastMinuteUpdate = Date.now();
+
+function updateViewerCount() {
+    const now = Date.now();
+
+    if (now - lastMinuteUpdate >= 60000) {
+        const minIncrease = 200;
+        const maxIncrease = 500;
+        const increase = Math.floor(Math.random() * (maxIncrease - minIncrease + 1)) + minIncrease;
+        baseViewers += increase;
+        lastMinuteUpdate = now;
+    }
+
+    const variation = Math.floor(Math.random() * 100) - 50;
+    currentViewers = Math.max(baseViewers + variation, baseViewers - 100);
+
+    document.getElementById('numero-pessoas').textContent = `${currentViewers.toLocaleString('en-US')} people are watching now!`;
+}
+
+setInterval(updateViewerCount, 5000);
+updateViewerCount();
+</script>
+</body>
+</html>
