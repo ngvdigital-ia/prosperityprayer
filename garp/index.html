@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <script>
   window.pixelId = "6970fcf0dd8ebb7b9ab9f12f";
@@ -35,240 +35,473 @@
 
 <style>
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    color: #000000;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #fff;
+    color: #030303;
 }
 
-.main-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding-bottom: 120px;
-}
-
-.container {
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-.text {
-    text-align: center;
-    padding: 25px 15px;
-    font-weight: 700;
-    font-size: 24px;
-    color: #000000;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    background: #ffffff;
-    border-radius: 15px;
-    border: 1px solid #d0d0d0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-
-.text span[style*="color: red"] {
-    color: #dc143c !important;
-}
-
-.live-status {
+/* Header YouTube */
+.yt-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 15px 25px;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 600;
-    background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
-    border: none;
-    border-radius: 25px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.live-dot {
-    width: 12px;
-    height: 12px;
-    background: #ffffff;
+.yt-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.yt-menu-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.yt-logo {
+    height: 20px;
+    cursor: pointer;
+}
+
+.yt-search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 600px;
+    margin: 0 40px;
+}
+
+.yt-search-box input {
+    flex: 1;
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.yt-search-box input:focus {
+    border-color: #1c62b9;
+}
+
+.yt-search-box button {
+    height: 40px;
+    width: 64px;
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+}
+
+.yt-search-box button img {
+    width: 24px;
+    height: 24px;
+}
+
+.yt-profile {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    animation: pulse 1.5s infinite;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+/* Main Content */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+}
+
+/* Video Section */
+.video-section {
+    display: flex;
+    gap: 24px;
+}
+
+.video-primary {
+    flex: 1;
+    min-width: 0;
 }
 
 .video-container {
-    margin: 30px 0;
     width: 100%;
-    max-width: 900px;
+    background: #000;
     position: relative;
-    background: transparent;
 }
 
-.disclaimer {
-    background: #f5f5f5;
-    color: #666;
+.video-title {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #030303;
+}
+
+.video-title .live-time {
+    color: #606060;
+    font-weight: 400;
+}
+
+/* Channel Info */
+.channel-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.channel-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.channel-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.channel-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #030303;
+}
+
+.channel-subs {
     font-size: 12px;
-    text-align: center;
-    padding: 30px 20px;
-    width: 100%;
-    border-top: 1px solid #ddd;
-    margin-top: 40px;
+    color: #606060;
+}
+
+.subscribe-btn {
+    background: #cc0000;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.subscribe-btn:hover {
+    background: #aa0000;
+}
+
+/* Viewers Count */
+.viewers-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 8px 0;
+}
+
+.viewers-count {
+    font-size: 14px;
+    color: #030303;
+}
+
+.viewers-count span {
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: #cc0000;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+/* Live Chat */
+.live-chat {
+    width: 400px;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.chat-header {
+    padding: 16px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 16px;
+}
+
+.chat-message {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    animation: fadeIn 0.3s ease;
+}
+
+.chat-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.chat-content {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.chat-name {
+    font-weight: 500;
+    color: #065fd4;
+    margin-right: 4px;
+}
+
+.chat-text {
+    color: #030303;
+}
+
+.chat-input {
+    padding: 16px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+.chat-emoji {
+    font-size: 20px;
+    cursor: pointer;
 }
 
 @keyframes pulse {
-    0% {
-        opacity: 1;
-        transform: scale(1);
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .video-section {
+        flex-direction: column;
     }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.1);
+
+    .live-chat {
+        width: 100%;
+        height: 400px;
     }
-    100% {
-        opacity: 1;
-        transform: scale(1);
+
+    .yt-search-box {
+        display: none;
+    }
+
+    .main-container {
+        padding: 16px;
     }
 }
 
-@media screen and (max-width: 768px) {
-    .container {
-        max-width: 100vw;
-        padding: 15px 10px;
-    }
-
-    .text {
-        font-size: 20px;
-        padding: 20px 15px;
-        margin: 0 5px 10px 5px;
-    }
-
-    .live-status {
-        font-size: 16px;
-        padding: 12px 20px;
-        gap: 8px;
-        margin: 0 5px 30px 5px;
-    }
-
-    .live-dot {
-        width: 10px;
-        height: 10px;
-    }
-
-    .video-container {
-        margin: 20px 5px;
-    }
-
-    .disclaimer {
-        font-size: 11px;
-        padding: 25px 15px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .text {
-        font-size: 18px;
-        padding: 15px 12px;
-    }
-
-    .live-status {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-
-    .container {
-        padding: 10px 8px;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .text {
-        font-size: 16px;
-        padding: 12px 10px;
-    }
-
-    .live-status {
-        font-size: 13px;
+@media (max-width: 480px) {
+    .yt-header {
         padding: 8px 12px;
+    }
+
+    .video-title {
+        font-size: 16px;
+    }
+
+    .channel-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .subscribe-btn {
+        width: 100%;
     }
 }
 </style>
 </head>
 <body>
-<div class="main-wrapper">
-    <div class="container">
-        <div class="text">
-            Today, <span style="color: red;"><span id="date"></span></span> it's the last chance God gives you to have his blessing
+
+<!-- YouTube Header -->
+<header class="yt-header">
+    <div class="yt-header-left">
+        <svg class="yt-menu-icon" viewBox="0 0 24 24"><path fill="#030303" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        <svg class="yt-logo" viewBox="0 0 90 20"><path fill="#FF0000" d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 0 14.285 0 14.285 0C14.285 0 5.35042 0 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C0 5.35042 0 10 0 10C0 10 0 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z"/><path fill="#FFF" d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z"/><path fill="#030303" d="M34.6024 19.4045C33.6942 18.7889 33.0377 17.8433 32.6328 16.5678C32.228 15.2922 32.0256 13.6837 32.0256 11.7422C32.0256 9.80076 32.2325 8.19228 32.6467 6.91672C33.061 5.64115 33.7264 4.69559 34.6431 4.08C35.5599 3.4644 36.7403 3.15661 38.1845 3.15661C39.6287 3.15661 40.8002 3.4644 41.6989 4.08C42.5976 4.69559 43.2495 5.64115 43.6548 6.91672C44.06 8.19228 44.2627 9.80076 44.2627 11.7422C44.2627 13.6837 44.0556 15.2922 43.6414 16.5678C43.2271 17.8433 42.566 18.7889 41.658 19.4045C40.75 20.0201 39.5765 20.3279 38.1379 20.3279C36.6993 20.3279 35.5104 20.0201 34.6024 19.4045ZM40.3733 17.0158C40.716 16.1494 40.8874 14.9367 40.8874 13.378V10.0045C40.8874 8.48586 40.7161 7.28831 40.3733 6.41181C40.0306 5.53531 39.3918 5.09706 38.4569 5.09706C37.5219 5.09706 36.874 5.53531 36.5134 6.41181C36.1527 7.28831 35.9724 8.48586 35.9724 10.0045V13.378C35.9724 14.9367 36.1527 16.1494 36.5134 17.0158C36.874 17.8823 37.531 18.3155 38.4838 18.3155C39.4365 18.3155 40.0306 17.8823 40.3733 17.0158ZM52.6072 19.4186C51.6035 18.7835 50.8871 17.8284 50.4583 16.5534C50.0294 15.2784 49.815 13.6655 49.815 11.7148C49.815 9.76414 50.0339 8.14588 50.4718 6.86016C50.9097 5.57444 51.6304 4.61436 52.6339 3.98C53.6374 3.34563 54.9033 3.02844 56.4315 3.02844C57.8037 3.02844 58.9116 3.30563 59.7554 3.86C60.5992 4.41437 61.2158 5.18046 61.6053 6.15828C61.9948 7.13609 62.1895 8.26703 62.1895 9.55109V11.5869H53.1773V13.4227C53.1773 14.5925 53.3487 15.5014 53.6914 16.1494C54.0342 16.7974 54.6265 17.1214 55.4683 17.1214C56.0697 17.1214 56.5443 16.9808 56.8921 16.6996C57.24 16.4184 57.4788 16.0164 57.6086 15.4937C57.7384 14.9711 57.8033 14.3375 57.8033 13.593V12.6759H61.8789V13.593C61.8789 15.2833 61.5319 16.6559 60.8378 17.7106C60.1438 18.7652 59.0672 19.515 57.6079 19.9599C57.4736 19.9953 57.336 20.0264 57.1953 20.0532C56.1884 20.2384 55.1043 20.2826 53.9729 20.1858C53.415 20.1373 52.9892 20.0532 52.6072 19.4186ZM58.4421 9.58156V8.97769C58.4421 7.7845 58.2663 6.87016 57.9147 6.23469C57.563 5.59922 56.9617 5.28148 56.1108 5.28148C55.2599 5.28148 54.6453 5.59922 54.2668 6.23469C53.8883 6.87016 53.6991 7.7845 53.6991 8.97769V9.58156H58.4421ZM68.2311 20.1302V3.36133H72.2067V20.1302H68.2311ZM74.3223 20.1302V3.36133H78.2979V20.1302H74.3223ZM82.3715 20.1302V10.1961C82.3715 8.47047 82.6278 7.12414 83.1405 6.15711C83.6531 5.19008 84.6613 4.70656 86.165 4.70656H87.8174V7.87086H86.6548C85.9831 7.87086 85.5187 8.05547 85.2618 8.42469C85.0048 8.79391 84.8763 9.40977 84.8763 10.2724V20.1302H82.3715Z"/></svg>
+    </div>
+    <div class="yt-search-box">
+        <input type="text" placeholder="Search">
+        <button><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#606060" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
+    </div>
+    <img class="yt-profile" src="https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png" alt="Profile">
+</header>
+
+<!-- Main Content -->
+<main class="main-container">
+    <div class="video-section">
+        <!-- Video Primary -->
+        <div class="video-primary">
+            <div class="video-container">
+                <vturb-smartplayer id="vid-6970f7efc9aefd66086fbaae" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+                <script type="text/javascript">
+                    var s=document.createElement("script");
+                    s.src="https://scripts.converteai.net/00c3b583-8874-4e64-a32e-65f6dd9ba521/players/6970f7efc9aefd66086fbaae/v4/player.js";
+                    s.async=!0;
+                    document.head.appendChild(s);
+                </script>
+            </div>
+
+            <h1 class="video-title">
+                REVEALED: The Guardian Angel Prayer that reconnects your soul with divine protection...<span class="live-time" id="live-time"></span>
+            </h1>
+
+            <div class="channel-info">
+                <div class="channel-left">
+                    <img class="channel-avatar" src="https://yt3.ggpht.com/ytc/AIdro_kMSqcJQGgfJ1A6kGTR0_1bMVlVqe1FW8KHs9OLCD47zA=s68-c-k-c0x00ffffff-no-rj" alt="Channel">
+                    <div>
+                        <div class="channel-name">ABC News</div>
+                        <div class="channel-subs">96K subscribers</div>
+                    </div>
+                </div>
+                <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+            </div>
+
+            <div class="viewers-section">
+                <div class="live-dot"></div>
+                <div class="viewers-count"><span id="viewers-count">54,972</span> Watching now</div>
+            </div>
         </div>
 
-        <div class="live-status">
-            <div class="live-dot"></div>
-            <span id="numero-pessoas">27,827 people are watching now!</span>
-        </div>
-
-        <div class="video-container" id="video-container">
-            <vturb-smartplayer id="vid-6970f7efc9aefd66086fbaae" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
-            <script type="text/javascript">
-                var s=document.createElement("script");
-                s.src="https://scripts.converteai.net/00c3b583-8874-4e64-a32e-65f6dd9ba521/players/6970f7efc9aefd66086fbaae/v4/player.js";
-                s.async=!0;
-                document.head.appendChild(s);
-            </script>
+        <!-- Live Chat -->
+        <div class="live-chat">
+            <div class="chat-header">Live chat</div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Chat...">
+                <span class="chat-emoji">&#128522;</span>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="disclaimer">
-    This site is not affiliated, endorsed or sponsored by Facebook or Google. Facebook and Google are registered trademarks of their respective owners. All testimonials are from real people, but results may vary.
-</div>
+</main>
 
 <script>
-function setCurrentDate() {
-    const today = new Date();
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
-    document.getElementById('date').textContent = formattedDate;
+// Set live time
+function setLiveTime() {
+    const now = new Date();
+    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+    const time = now.toLocaleTimeString('en-US', options);
+    const dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
+    const date = now.toLocaleDateString('en-US', dateOptions);
+    document.getElementById('live-time').textContent = ` | Live at ${time}, ${date}.`;
 }
-setCurrentDate();
+setLiveTime();
 
-let baseViewers = 27827;
-let currentViewers = baseViewers;
-let lastMinuteUpdate = Date.now();
+// Viewers count
+let baseViewers = 54972;
+function updateViewers() {
+    const variation = Math.floor(Math.random() * 100) - 50;
+    baseViewers = Math.max(54000, baseViewers + variation);
+    document.getElementById('viewers-count').textContent = baseViewers.toLocaleString('en-US');
+}
+setInterval(updateViewers, 5000);
 
-function updateViewerCount() {
-    const now = Date.now();
+// Chat messages
+const chatMessages = [
+    { name: "Robert Peterson", text: "May God bless you all! &#128591; In the name of Jesus" },
+    { name: "Luciana Parker", text: "This broadcast changed my day... gratitude to everyone!" },
+    { name: "Susan Anderson", text: "Wow, I entered just at prayer time... Thank God &#128519;&#128519;" },
+    { name: "Andrew Lewis", text: "God is wonderful! Amen &#128588;" },
+    { name: "Paul Caesar", text: "Guardian Angel, guide our steps!" },
+    { name: "Vera Lucy", text: "Bless, Lord, every family connected to this live broadcast &#128588;&#128588;&#128588;" },
+    { name: "Irene Newman", text: "&#10084;&#65039;&#10084;&#65039;&#10084;&#65039;&#10084;&#65039;&#10084;&#65039;" },
+    { name: "Claudia Foster", text: "Amen!! &#128591;&#128591;&#128591;" },
+    { name: "Gilbert Lima", text: "Wow, a Guardian Angel Prayer? It can only be from God himself" },
+    { name: "Regina Celia", text: "Glory to You, Lord! We are ready &#128591;" },
+    { name: "Mary Johnson", text: "Thank you Lord for this blessing &#128591;" },
+    { name: "Thomas White", text: "My guardian angel has always protected me &#128519;" },
+    { name: "Angela Davis", text: "Sharing with my whole family! God bless!" },
+    { name: "Michael Brown", text: "This is exactly what I needed today &#128591;&#128591;" },
+    { name: "Patricia Wilson", text: "Angels are among us! Amen!" }
+];
 
-    if (now - lastMinuteUpdate >= 60000) {
-        const minIncrease = 200;
-        const maxIncrease = 500;
-        const increase = Math.floor(Math.random() * (maxIncrease - minIncrease + 1)) + minIncrease;
-        baseViewers += increase;
-        lastMinuteUpdate = now;
+const avatars = [
+    "https://i.pravatar.cc/100?img=1", "https://i.pravatar.cc/100?img=2", "https://i.pravatar.cc/100?img=3",
+    "https://i.pravatar.cc/100?img=4", "https://i.pravatar.cc/100?img=5", "https://i.pravatar.cc/100?img=6",
+    "https://i.pravatar.cc/100?img=7", "https://i.pravatar.cc/100?img=8", "https://i.pravatar.cc/100?img=9",
+    "https://i.pravatar.cc/100?img=10", "https://i.pravatar.cc/100?img=11", "https://i.pravatar.cc/100?img=12",
+    "https://i.pravatar.cc/100?img=13", "https://i.pravatar.cc/100?img=14", "https://i.pravatar.cc/100?img=15"
+];
+
+let msgIndex = 0;
+const chatContainer = document.getElementById('chat-messages');
+
+function addChatMessage() {
+    const msg = chatMessages[msgIndex % chatMessages.length];
+    const avatar = avatars[msgIndex % avatars.length];
+
+    const msgEl = document.createElement('div');
+    msgEl.className = 'chat-message';
+    msgEl.innerHTML = `
+        <img class="chat-avatar" src="${avatar}" alt="">
+        <div class="chat-content">
+            <span class="chat-name">${msg.name}</span>
+            <span class="chat-text">${msg.text}</span>
+        </div>
+    `;
+
+    chatContainer.appendChild(msgEl);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    if (chatContainer.children.length > 50) {
+        chatContainer.removeChild(chatContainer.firstChild);
     }
 
-    const variation = Math.floor(Math.random() * 100) - 50;
-    currentViewers = Math.max(baseViewers + variation, baseViewers - 100);
-
-    document.getElementById('numero-pessoas').textContent = `${currentViewers.toLocaleString('en-US')} people are watching now!`;
+    msgIndex++;
 }
 
-setInterval(updateViewerCount, 5000);
-updateViewerCount();
+// Add initial messages
+for (let i = 0; i < 8; i++) {
+    addChatMessage();
+}
+
+// Add new messages periodically
+setInterval(addChatMessage, 3000 + Math.random() * 2000);
 </script>
+
 </body>
 </html>
