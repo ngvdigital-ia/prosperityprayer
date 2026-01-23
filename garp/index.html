@@ -157,29 +157,17 @@ body {
 /* Main Container */
 .main-content {
   display: flex;
-  flex-direction: row;
-  max-width: 1200px;
+  flex-direction: column;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  gap: 20px;
+  gap: 16px;
 }
 
 .video-section {
-  flex: 1;
+  width: 100%;
 }
 
-.chat-section {
-  width: 400px;
-}
-
-@media (max-width: 900px) {
-  .main-content {
-    flex-direction: column;
-  }
-  .chat-section {
-    width: 100%;
-  }
-}
 
 /* Video Title */
 .video-title {
@@ -295,10 +283,6 @@ body {
   transition: all 0.6s ease;
 }
 
-/* Mobile/Desktop Toggle */
-.mobile-only { display: none; }
-.desktop-only { display: block; }
-
 @media (max-width: 767px) {
   .top-row {
     flex-direction: column;
@@ -312,15 +296,6 @@ body {
   }
   .subscribe-btn {
     margin-left: auto;
-  }
-  .mobile-only { display: block; }
-  .desktop-only { display: none; }
-  .view-counter-mobile {
-    background: none;
-    color: #888 !important;
-    padding: 0;
-    font-size: 14px;
-    line-height: 1.4;
   }
 }
 
@@ -497,13 +472,24 @@ img.avatar {
       <span id="live-timestamp">Live at 2:01 PM, 01/23/2026.</span>
     </h2>
 
+    <!-- Chat Section (below title) -->
+    <div class="chat-container">
+      <div class="chat-header">Live chat</div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-container">
+        <input id="chatInput" class="chat-input" type="text" placeholder="Chat...">
+        <div class="emoji-button-container">
+          <div id="emojiButton" class="emoji">😊</div>
+          <div id="emojiMenu" class="emoji-menu">
+            <span>😀</span><span>😁</span><span>😂</span><span>😍</span>
+            <span>😎</span><span>🤔</span><span>😜</span><span>🙃</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- YouTube Live Container -->
     <div class="youtube-live-container">
-      <!-- Mobile Viewer Counter -->
-      <div class="view-counter view-counter-mobile mobile-only" id="view-counter-mobile">
-        <span class="view-number" id="view-number-mobile">55,000</span> Watching now
-      </div>
-
       <!-- Channel + Subscribe + Likes -->
       <div class="top-row">
         <div class="channel-section">
@@ -525,28 +511,10 @@ img.avatar {
         </div>
       </div>
 
-      <!-- Desktop Viewer Counter -->
-      <div class="view-counter-wrapper desktop-only">
+      <!-- Viewer Counter -->
+      <div class="view-counter-wrapper">
         <div class="view-counter" id="view-counter">
           <span class="view-number" id="view-number">55,000</span> Watching now
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Chat Section -->
-  <div class="chat-section">
-    <div class="chat-container">
-      <div class="chat-header">Live chat</div>
-      <div id="chatMessages" class="chat-messages"></div>
-      <div class="chat-input-container">
-        <input id="chatInput" class="chat-input" type="text" placeholder="Chat...">
-        <div class="emoji-button-container">
-          <div id="emojiButton" class="emoji">😊</div>
-          <div id="emojiMenu" class="emoji-menu">
-            <span>😀</span><span>😁</span><span>😂</span><span>😍</span>
-            <span>😎</span><span>🤔</span><span>😜</span><span>🙃</span>
-          </div>
         </div>
       </div>
     </div>
@@ -576,7 +544,6 @@ function updateViewCount() {
   viewCount = Math.max(50000, Math.min(60000, viewCount));
   const formatted = viewCount.toLocaleString('en-US');
   document.getElementById('view-number').textContent = formatted;
-  document.getElementById('view-number-mobile').textContent = formatted;
 }
 setInterval(updateViewCount, 3000);
 
