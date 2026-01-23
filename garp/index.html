@@ -580,80 +580,95 @@ function updateViewCount() {
 }
 setInterval(updateViewCount, 3000);
 
-// Chat messages
-const chatMessages = [
-  { name: "Robert Peterson", text: "May God bless you all! 🙏 In the name of Jesus" },
-  { name: "Luciana Parker", text: "This broadcast changed my day... gratitude to everyone!" },
-  { name: "Susan Anderson", text: "Wow, I entered just at prayer time... Thank God 😇😇" },
-  { name: "Andrew Lewis", text: "God is wonderful! Amen 🙌" },
-  { name: "Paul Caesar", text: "Guardian Angel, guide our steps!" },
-  { name: "Vera Lucy", text: "Bless, Lord, every family connected to this live broadcast 🙌🙌🙌" },
-  { name: "Irene Newman", text: "❤️❤️❤️❤️❤️" },
-  { name: "Claudia Foster", text: "Amen!! 🙏🙏🙏" },
-  { name: "Gilbert Lima", text: "Wow, a Guardian Angel Prayer? It can only be from God himself" },
-  { name: "Regina Celia", text: "Glory to You, Lord! We are ready 🙏" },
-  { name: "Martha Johnson", text: "I just started watching... has anyone used this prayer already?" },
-  { name: "Eliana Roberts", text: "🙏🙏🙏" },
-  { name: "Support Team", text: "Yes! Thousands of people are already reporting divine protection, peace, and spiritual reconnection through this Guardian Angel Prayer. 🙌📿" },
-  { name: "Joan Lima", text: "Amen, glory to God!" },
-  { name: "Mary Williams", text: "Thank you Lord for this blessing 🙏" },
-  { name: "Thomas White", text: "My guardian angel has always protected me 😇" },
-  { name: "Angela Davis", text: "Sharing with my whole family! God bless!" },
-  { name: "Michael Brown", text: "This is exactly what I needed today 🙏🙏" },
-  { name: "Patricia Wilson", text: "Angels are among us! Amen!" },
-  { name: "David Martinez", text: "Powerful prayer! Thank you 🙌" }
+// Chat System - Scheduled Messages (same as reference)
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const emojiButton = document.getElementById('emojiButton');
+const emojiMenu = document.getElementById('emojiMenu');
+
+const defaultAvatar = 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/icone_usuario.webp';
+
+const scheduledMessages = [
+  { time: 1, user: 'Robert Peterson', text: 'May God bless you all! 🙏 In the name of Jesus' },
+  { time: 5, user: 'Luciana Parker', text: 'This broadcast changed my day... gratitude to everyone!' },
+  { time: 8, user: 'Susan Anderson', text: 'Wow, I entered just at prayer time... Thank God 😇😇', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-08.webp' },
+  { time: 10, user: 'Andrew Lewis', text: 'God is wonderful! Amen 🙌' },
+  { time: 11, user: 'Paul Caesar', text: 'Guardian Angel, guide our steps!' },
+  { time: 12, user: 'Vera Lucy', text: 'Bless, Lord, every family connected to this live broadcast 🙌🙌🙌', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-12.webp' },
+  { time: 12, user: 'Irene Newman', text: '❤️❤️❤️❤️❤️', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-13.webp' },
+  { time: 15, user: 'Claudia Foster', text: 'Amen!! 🙏🙏🙏' },
+  { time: 17, user: 'Gilbert Lima', text: 'Wow, a Guardian Angel Prayer? It can only be from God himself', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-17.webp' },
+  { time: 19, user: 'Regina Celia', text: 'Glory to You, Lord! We are ready 🙏', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-19.webp' },
+  { time: 23, user: 'Martha Johnson', text: 'I just started watching... has anyone used this prayer already?' },
+  { time: 24, user: 'Eliana Roberts', text: '🙏🙏🙏', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-24.webp' },
+  { time: 26, user: 'Support Team', text: 'Yes, Martha! Thousands of people are already reporting divine protection, peace, and spiritual reconnection through this Guardian Angel Prayer. 🙌📿' },
+  { time: 33, user: 'Joan Lima', text: 'Amen, glory to God!', avatar: 'https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-33.webp' }
 ];
 
-const avatars = [
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/icone_usuario.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-08.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-12.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-13.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-17.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-19.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-24.webp",
-  "https://oracaosagrada.viveremharmonia.com/wp-content/uploads/2025/05/osa_foto_perfil_00-33.webp"
-];
+let pageStartTime = Date.now();
+let currentPageTime = 0;
 
-let msgIndex = 0;
-const chatContainer = document.getElementById('chatMessages');
+function updatePageTimer() {
+  currentPageTime = (Date.now() - pageStartTime) / 1000;
+  requestAnimationFrame(updatePageTimer);
+}
 
-function addMessage() {
-  const msg = chatMessages[msgIndex % chatMessages.length];
-  const avatar = avatars[msgIndex % avatars.length];
+function addMessage(user, text, avatar = defaultAvatar) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message');
 
-  const div = document.createElement('div');
-  div.className = 'message';
-  div.innerHTML = `
-    <img class="avatar" src="${avatar}">
-    <div>
-      <span class="username">${msg.name}</span>
-      <span class="text">${msg.text}</span>
-    </div>
-  `;
+  const avatarImg = document.createElement('img');
+  avatarImg.classList.add('avatar');
+  avatarImg.src = avatar;
 
-  chatContainer.appendChild(div);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+  const contentDiv = document.createElement('div');
+  const usernameSpan = document.createElement('span');
+  usernameSpan.classList.add('username');
+  usernameSpan.textContent = user;
+  const textSpan = document.createElement('span');
+  textSpan.classList.add('text');
+  textSpan.textContent = text;
 
-  if (chatContainer.children.length > 50) {
-    chatContainer.removeChild(chatContainer.firstChild);
+  contentDiv.appendChild(usernameSpan);
+  contentDiv.appendChild(textSpan);
+  messageDiv.appendChild(avatarImg);
+  messageDiv.appendChild(contentDiv);
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function checkScheduledMessages() {
+  const elapsedSeconds = Math.floor(currentPageTime);
+  scheduledMessages.forEach((msg) => {
+    if (elapsedSeconds >= msg.time && !msg.sent) {
+      addMessage(msg.user, msg.text, msg.avatar || defaultAvatar);
+      msg.sent = true;
+    }
+  });
+  requestAnimationFrame(checkScheduledMessages);
+}
+
+updatePageTimer();
+requestAnimationFrame(checkScheduledMessages);
+
+chatInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter' && chatInput.value.trim() !== '') {
+    addMessage('You', chatInput.value.trim());
+    chatInput.value = '';
   }
-
-  msgIndex++;
-}
-
-// Add initial messages
-for (let i = 0; i < 8; i++) {
-  addMessage();
-}
-
-// Add new messages periodically
-setInterval(addMessage, 4000 + Math.random() * 2000);
+});
 
 // Emoji button toggle
-document.getElementById('emojiButton').addEventListener('click', function() {
-  const menu = document.getElementById('emojiMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+emojiButton.addEventListener('click', function() {
+  emojiMenu.style.display = (emojiMenu.style.display === 'block') ? 'none' : 'block';
+});
+
+emojiMenu.addEventListener('click', function(event) {
+  if (event.target.tagName === 'SPAN') {
+    chatInput.value += event.target.textContent;
+    chatInput.focus();
+    emojiMenu.style.display = 'none';
+  }
 });
 </script>
 
