@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Scrolls of Prosperity</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .warning-banner {
+      background: linear-gradient(90deg, #b91c1c, #dc2626);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      line-height: 1.5;
+    }
+
+    .section {
+      padding: 48px 24px;
+    }
+    .section--alt {
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+    .section--alt h1,
+    .section--alt h2 {
+      color: #000000;
+    }
+    .section--alt .testimonial {
+      border-color: rgba(0,0,0,0.15);
+    }
+    .section--alt .testimonial__text {
+      color: rgba(0,0,0,0.75);
+    }
+    .section--alt .testimonial__title {
+      color: #000000;
+    }
+    .section--alt .benefits-list li::before {
+      color: #16a34a;
+    }
+    .section--alt .guarantee {
+      color: rgba(0,0,0,0.5);
+    }
+    .section__inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .progress-section {
+      padding: 24px 24px 0;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .progress-label {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .progress-bar-track {
+      width: 100%;
+      height: 40px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #333;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 90%;
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 24px; text-align: center; }
+    h2 { font-size: 26px; font-weight: 700; line-height: 1.35; margin-bottom: 20px; }
+    p { margin-bottom: 20px; }
+
+    .benefits-list { list-style: none; padding: 0; margin: 24px 0; }
+    .benefits-list li { padding: 12px 0 12px 36px; position: relative; line-height: 1.6; }
+    .benefits-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .testimonial {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .testimonial__avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .testimonial__content { flex: 1; }
+    .testimonial__name { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+    .testimonial__title { font-weight: 700; font-size: 18px; margin-bottom: 16px; text-transform: uppercase; }
+    .testimonial__text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.85); font-style: italic; }
+
+    .cta-section { text-align: center; padding: 40px 0 16px; }
+    .cta-accept {
+      display: block;
+      width: 100%;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #15803d, #16a34a);
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(34,197,94,0.35), 0 0 60px rgba(34,197,94,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+      font-family: inherit;
+    }
+    .cta-accept:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(34,197,94,0.5), 0 0 80px rgba(34,197,94,0.2);
+    }
+    .cta-decline {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px;
+      background: none;
+      border: none;
+      color: #999999;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: inherit;
+    }
+    .cta-decline:hover { color: #cccccc; }
+
+    .guarantee { text-align: center; padding: 16px 0; color: rgba(255,255,255,0.6); font-size: 14px; }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      h1 { font-size: 26px; }
+      h2 { font-size: 22px; }
+      .section { padding: 32px 16px; }
+      .cta-accept { font-size: 18px; padding: 18px 24px; }
+      .testimonial { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .progress-section { padding: 16px 16px 0; }
+      .warning-banner { font-size: 13px; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Warning Banner -->
+  <div class="warning-banner">
+    IMPORTANT: Your purchase is being processed. Please DO NOT leave this page until the process is complete to avoid payment errors.
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill">
+        <span>PURCHASE COMPLETE!</span>
+        <span>90%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h1>CONGRATS ON YOUR PURCHASE!</h1>
+      <p><strong>YOU JUST TOOK THE FIRST STEP TO RESTORE YOUR CONNECTION WITH YOUR GUARDIAN ANGEL.</strong></p>
+      <p>But now I'm going to show you how to unlock the deepest level of prosperity there is—a secret that stayed buried for almost two thousand years in the caves of Qumran.</p>
+      <p>Let me explain.</p>
+      <p>The prayer you just got will reconnect you with your guardian angel. That's powerful. That's going to change your life.</p>
+      <p>But there's something very few people know.</p>
+      <p><strong>Carlo Acutis, before he died, studied a major event deeply—something he called "the greatest spiritual discovery of the twentieth century."</strong></p>
+    </div>
+  </div>
+
+  <!-- Section 2 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>The Dead Sea Scrolls.</h2>
+      <p>You've probably heard of them. Back in <strong>1947</strong>, a group of Bedouin shepherds were looking for a lost goat in the caves of Qumran, near the Dead Sea in Israel.</p>
+      <p>One of them tossed a rock into a cave and heard something break.</p>
+      <p>When they went in, they found ancient clay jars. Inside were rolled-up leather scrolls—texts nobody had seen in almost <strong>two thousand</strong> years.</p>
+      <p>It was the greatest biblical archaeological discovery of all time.</p>
+      <p>But here's what nobody tells you.</p>
+    </div>
+  </div>
+
+  <!-- Section 3 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>How Broke Shepherds Got Rich Without Reading a Single Word</h2>
+      <p>Those Bedouins were poor nomads. They were basically living on next to nothing out in the desert.</p>
+      <p>And within months of the discovery… every one of them got rich.</p>
+      <p>I'm not exaggerating.</p>
+      <p>They sold the first scrolls for a modest amount. But then something started happening. Opportunities just showed up. Buyers came straight to them. Money started coming in from unexpected places.</p>
+      <p>One of the Bedouins, Muhammed edh-Dhib—the youngest in the group—ended up becoming one of the most respected men in his tribe. His family prospered for generations.</p>
+      <p>Coincidence?</p>
+      <p>Carlo Acutis didn't think so.</p>
+      <p>He spent months studying the original accounts—and he discovered something incredible.</p>
+      <p>Among the scrolls they found, there were texts that weren't part of the traditional Bible. Prayers the Essenes—a community of devoted Jews who lived in those caves—recited specifically to invoke prosperity through angels.</p>
+      <p>The Essenes believed there were specific angels assigned to material abundance—and those angels only responded to a very specific kind of prayer.</p>
+      <p>Carlo found fragments of these prayers in the Vatican archives. Texts that had been translated… but never released to the public.</p>
+      <p>And he realized something that changed everything.</p>
+      <p>The guardian angel reconnection prayer—the one you just bought—opens the channel. It restores communication.</p>
+      <p>But the Essenes' Prosperity Prayers do something different.</p>
+      <p>They activate the angels of abundance.</p>
+      <p>Think of it like this:</p>
+      <p>The first prayer is like turning on your phone. You establish the connection.</p>
+      <p>But the Prosperity Prayers are like dialing the exact number of the angel in charge of your finances, your work, your opportunities.</p>
+      <p>That's why those Bedouins got rich.</p>
+      <p>They couldn't read. They didn't even understand what they had found. But just being in the presence of those sacred texts—just touching those prayers with their own hands—activated something.</p>
+      <p>Now imagine what can happen when you recite those prayers on purpose, with faith, with intention.</p>
+    </div>
+  </div>
+
+  <!-- Section 4 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>The Three Most Powerful Levels of Angelic Blessings in the Spiritual Realm!</h2>
+      <p><em>Father Benjamin explained this to me the last time we met.</em></p>
+      <p><em>He said: "Mark, there are <strong>three</strong> levels of angelic blessing."</em></p>
+      <p><em>#1 LEVEL: <strong>Protection</strong> — your angel keeps you from harm.</em></p>
+      <p><em>#2 LEVEL: <strong>Guidance</strong> — he shows you the way.</em></p>
+      <p><em>#3 LEVEL: <strong>Provision</strong> — and this level is only accessed by those who know the right prayers.</em></p>
+      <p>I asked him why the Church never taught this.</p>
+      <p>He sighed and said: <em>"Because a prosperous person doesn't need the Church the same way. A person who knows how to manifest abundance through angels becomes… independent."</em></p>
+      <p>That shocked me. But it made perfect sense.</p>
+      <p>For centuries, this knowledge was guarded. Locked in archives. Translated only for elite scholars.</p>
+      <p>Until Carlo Acutis…</p>
+      <p>He compiled everything: the Essenes' original prayers, the fragments found in Qumran, the specific invocations for every kind of financial need.</p>
+    </div>
+  </div>
+
+  <!-- Section 5 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>And Today, You Have the Chance to Access That Knowledge.</h2>
+      <p>I put it all together in a guide called <strong>"The Scrolls of Prosperity."</strong></p>
+      <p>Inside, you'll find:</p>
+      <ul class="benefits-list">
+        <li><strong>Seven Abundance Activation Prayers</strong> — each one aimed at a different part of your financial life: debt, jobs, business, unexpected opportunities, inheritances, protection from loss, and multiplying what you already have.</li>
+        <li><strong>The Qumran Seven-Day Ritual</strong> — the same time period the Essenes used for their most sacred practices. One day for each prayer, in the exact sequence that maximizes results.</li>
+        <li><strong>The Angelic Keywords</strong> — specific ancient Hebrew terms that, according to the scrolls, "open the ears of the angels of provision." You don't need to know Hebrew—I include the exact pronunciation and meaning of every word.</li>
+        <li><strong>The Golden Hours Map</strong> — beyond 3 to 5 in the morning (which you already know), there are other moments in the day when prosperity angels are more receptive. The Essenes documented all of them.</li>
+        <li><strong>Three verified testimonials</strong> — stories of people who used these prayers and saw real results in their finances in less than 21 days.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 6 (dark) - Testimonial -->
+  <div class="section">
+    <div class="section__inner">
+      <p>Let me tell you about one of them.</p>
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/120?img=12" alt="Robert" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">From Rideshare Driver to Fleet Manager</div>
+          <div class="testimonial__name">Robert</div>
+          <div class="testimonial__text">Robert was a rideshare driver in New York City. He worked 14 hours a day and could barely pay the bills. He had 3 kids and a wife who couldn't work because of health issues.<br><br>He received the Qumran Prosperity Prayers and started reciting them every morning at 4 a.m., before heading out to work.<br><br>On the fifth day, a passenger left a briefcase in his car. Robert returned it. The passenger owned a transportation company—and he was so impressed by Robert's honesty that he offered him a job.<br><br>Today, Robert is a fleet manager. He earns four times what he used to. And he told me:<br><br><em>"It wasn't luck. It was my angel. I felt him guiding me that morning. I knew something was going to happen."</em></div>
+        </div>
+      </div>
+      <p>Stories like that aren't rare. They're what happens when you activate the right channel.</p>
+    </div>
+  </div>
+
+  <!-- Section 7 (white) - Pricing -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>Why I'm Offering This For So Little…</h2>
+      <p>Now I need to be honest with you.</p>
+      <p>This material wasn't in my original plan. I was going to keep these prayers for personal use and for a small group of close friends.</p>
+      <p>But after seeing the results… after getting messages from people whose lives were completely transformed… I realized it would be selfish to keep this to myself.</p>
+      <p>The real value of this knowledge is priceless. Scholars pay thousands of dollars just to access the archives where these texts are kept—and even then, most never get in.</p>
+      <p>But you won't pay thousands.</p>
+      <p>You won't even pay hundreds.</p>
+      <p>Because you already took the first step. You already showed your faith by getting Carlo Acutis' Guardian Angel Prayer.</p>
+      <p>And because of that, I want to offer you <strong>The Scrolls of Prosperity</strong> for just <strong>$67</strong>.</p>
+      <p>That's the price of a family pizza. A tank of gas. A streaming subscription you barely even use.</p>
+      <p>But what you're getting could change your financial situation forever.</p>
+      <p>Think about what you'd do with extra money every month. That promotion you deserve. Opportunities that just show up in your path.</p>
+      <p>That's the life the angels of prosperity want to give you.</p>
+    </div>
+  </div>
+
+  <!-- Section 8 (dark) - Final CTA -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>Your Angel Brought You to This Moment</h2>
+      <p>You just need to ask the right way.</p>
+      <p>Click the button below that says "YES! I Want The Scrolls of Prosperity" and add this sacred guide to your order right now.</p>
+      <p>The same 60-day guarantee applies. If you don't feel the presence of the angels of abundance in your life, if nothing changes in your finances, I'll refund every cent.</p>
+      <p>But I know that won't happen.</p>
+      <p>Because you didn't get here by accident. Your angel brought you to this moment.</p>
+      <p>Don't ignore the call.</p>
+      <p>Click the button below now.</p>
+      <div class="cta-section">
+        <button class="cta-accept" data-nexfy-accept>YES! I WANT THE SCROLLS OF PROSPERITY — $67</button>
+        <button class="cta-decline" data-nexfy-decline>NO, THANKS. I ONLY WANT THE BASIC PRAYER</button>
+      </div>
+      <div class="guarantee">60-Day Money-Back Guarantee — No Questions Asked</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" async defer></script>
+  <script src="https://www.rubuspay.com/upsell-widget.js" defer></script>
+  <script>
+    (function() {
+      history.pushState(null, '', location.href);
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', function() {
+        history.pushState(null, '', location.href);
+      });
+    })();
+  </script>
+
+</body>
+</html>

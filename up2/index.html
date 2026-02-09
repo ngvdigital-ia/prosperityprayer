@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bethesda Protocol</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .warning-banner {
+      background: linear-gradient(90deg, #b91c1c, #dc2626);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      line-height: 1.5;
+    }
+
+    .section { padding: 48px 24px; }
+    .section--alt {
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+    .section--alt h1,
+    .section--alt h2 {
+      color: #000000;
+    }
+    .section--alt .subtitle {
+      color: #666666;
+    }
+    .section--alt .testimonial {
+      border-color: rgba(0,0,0,0.15);
+    }
+    .section--alt .testimonial__text {
+      color: rgba(0,0,0,0.75);
+    }
+    .section--alt .testimonial__title {
+      color: #000000;
+    }
+    .section--alt .benefits-list li::before {
+      color: #16a34a;
+    }
+    .section--alt .guarantee {
+      color: rgba(0,0,0,0.5);
+    }
+    .section--alt .price-old {
+      color: #666666;
+    }
+    .section__inner { max-width: 780px; margin: 0 auto; }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 24px; text-align: center; }
+    h2 { font-size: 26px; font-weight: 700; line-height: 1.35; margin-bottom: 20px; }
+    p { margin-bottom: 20px; }
+
+    .subtitle { text-align: center; color: #999999; font-size: 16px; margin-bottom: 32px; }
+
+    .benefits-list { list-style: none; padding: 0; margin: 24px 0; }
+    .benefits-list li { padding: 12px 0 12px 36px; position: relative; line-height: 1.6; }
+    .benefits-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .testimonial {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .testimonial__avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .testimonial__content { flex: 1; }
+    .testimonial__name { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+    .testimonial__title { font-weight: 700; font-size: 18px; margin-bottom: 16px; text-transform: uppercase; }
+    .testimonial__text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.85); font-style: italic; }
+
+    .price-section { text-align: center; padding: 32px 0; }
+    .price-old { font-size: 22px; color: #999999; text-decoration: line-through; margin-right: 12px; }
+    .price-new { font-size: 36px; font-weight: 700; }
+
+    .cta-section { text-align: center; padding: 40px 0 16px; }
+    .cta-accept {
+      display: block;
+      width: 100%;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #15803d, #16a34a);
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(34,197,94,0.35), 0 0 60px rgba(34,197,94,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+      font-family: inherit;
+    }
+    .cta-accept:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(34,197,94,0.5), 0 0 80px rgba(34,197,94,0.2);
+    }
+    .cta-decline {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px;
+      background: none;
+      border: none;
+      color: #999999;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: inherit;
+    }
+    .cta-decline:hover { color: #cccccc; }
+
+    .guarantee { text-align: center; padding: 16px 0; color: rgba(255,255,255,0.6); font-size: 14px; }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      h1 { font-size: 26px; }
+      h2 { font-size: 22px; }
+      .section { padding: 32px 16px; }
+      .cta-accept { font-size: 18px; padding: 18px 24px; }
+      .testimonial { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .warning-banner { font-size: 13px; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="warning-banner">
+    DO NOT close this page yet. Your access is still being processed.
+  </div>
+
+  <!-- Section 1 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h1>CONGRATS! Your access is being processed...</h1>
+      <p class="subtitle">You made it further than 92% of people. And because of that, you get access to something almost nobody ever sees.</p>
+      <p>You're about to see something that goes beyond everything you've been shown so far.</p>
+      <p>But before that, answer me one thing—honestly...</p>
+      <p><strong>Is there someone in your life—maybe you—who's dealing with pain that won't go away, an illness doctors can't fix, or a health problem that feels like there's no solution?</strong></p>
+      <p>If you hesitated for even a second… if a face popped into your mind… if you felt that tightness in your chest…</p>
+      <p>Then what I'm about to reveal could be the answer you've been looking for for years.</p>
+    </div>
+  </div>
+
+  <!-- Section 2 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>Why Do Some People Get Healed… And Others Don't?</h2>
+      <p>That question haunted me for a long time.</p>
+      <p>I saw people praying with all the faith in the world. Fasting. Crying at the altar. And still… the healing didn't come.</p>
+      <p>While others—sometimes with what looked like less faith—were healed instantly.</p>
+      <p>Why?</p>
+      <p>The answer is in <strong>two</strong> places Jesus visited during His ministry on earth: two pools in Jerusalem that hold the most powerful secret about divine healing.</p>
+      <p>The Pool of Bethesda and the Pool of Siloam.</p>
+    </div>
+  </div>
+
+  <!-- Section 3 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>The Mystery of the Pool of Bethesda Can Heal You!</h2>
+      <p>In John 5, the Bible tells a story most people read without realizing what's really happening.</p>
+      <p>There was a pool in Jerusalem called Bethesda, surrounded by five covered porches. Crowds of sick people lay there—blind, lame, and paralyzed.</p>
+      <p>Why?</p>
+      <p>Because from time to time, an angel would come down and stir the water. And the first person who stepped into the pool after the water moved would be healed of whatever disease they had.</p>
+      <p>Did you catch that?</p>
+      <p>An angel came down from heaven specifically to heal.</p>
+      <p>It wasn't the water that healed—it was the angelic presence that made the water a tool for divine healing.</p>
+      <p>But there was a man there who had been sick for <strong>38 years</strong>. 38 years waiting for his chance. And he could never get in first.</p>
+      <p>When Jesus saw him, He asked: "Do you want to be healed?"</p>
+      <p>The man answered: "Sir, I have no one to help me into the pool when the water is stirred. While I'm trying to get in, someone else goes down ahead of me."</p>
+      <p>And then Jesus said something unbelievable: "Get up, pick up your mat, and walk."</p>
+      <p>And instantly, the man was healed.</p>
+    </div>
+  </div>
+
+  <!-- Section 4 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>What Jesus Did That the Angel Couldn't Do</h2>
+      <p>Pay close attention, because this changes everything.</p>
+      <p>The angel at Bethesda healed only one person at a time—and only whoever got into the water first.</p>
+      <p>But Jesus healed the man without him ever stepping into the pool.</p>
+      <p>Why?</p>
+      <p>Because Jesus had direct access to the source of healing. He didn't need the instrument—He was the channel.</p>
+      <p>And here's what Carlo Acutis discovered when he studied this passage in the original Greek and Aramaic manuscripts.</p>
+      <p>The word Jesus used to heal that man wasn't a normal word. It was a specific invocation—a healing prayer that directly activated the power of healing angels.</p>
+      <p>The early Christians knew this prayer. Peter used it to heal the lame man at the temple gate. Paul used it to heal Publius' father in Malta.</p>
+      <p>But over time, that prayer was lost.</p>
+      <p>Or better yet…</p>
+      <p>It was hidden.</p>
+    </div>
+  </div>
+
+  <!-- Section 5 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>The Healing Prayers Carlo Acutis Found in the Vatican Archives</h2>
+      <p>Carlo Acutis spent the last months of his life studying healing accounts from the early centuries of Christianity.</p>
+      <p>And he discovered the early Christians didn't pray for healing the way we do today.</p>
+      <p>They had specific prayers for each type of sickness.</p>
+      <p>Prayers for chronic pain. Prayers for blood diseases. Prayers for vision problems. Prayers for heart issues. Prayers for conditions doctors couldn't even diagnose.</p>
+      <p>And more importantly: they had specific rituals that went with each prayer.</p>
+      <p>They weren't complicated rituals. They were simple acts of faith—like the blind man who washed his eyes in the Pool of Siloam.</p>
+      <p>Carlo compiled these prayers and rituals into a document he called "The Secret of Healing."</p>
+      <p>And that's the document Father Benjamin handed to me in Italy.</p>
+    </div>
+  </div>
+
+  <!-- Section 6 (dark) - Benefits -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>And You're Going to Receive It Today…</h2>
+      <p>I digitized everything Carlo Acutis created in secret so more and more people could finally have access.</p>
+      <p>Inside, you'll find:</p>
+      <ul class="benefits-list">
+        <li><strong>12 specific healing prayers</strong> (taught by each of the disciples) — each one aimed at a different kind of condition: chronic pain, heart problems, diabetes, high blood pressure, vision issues, respiratory illnesses, stomach problems, skin conditions, blood diseases, neurological conditions, hormonal issues, and illnesses doctors can't diagnose.</li>
+        <li><strong>The 3 activation rituals</strong> — simple acts of faith that go with each prayer and amplify angelic intervention. Based directly on the methods used by Jesus and the apostles.</li>
+        <li><strong>Encyclopedia of Healing Angels</strong> — the names and roles of the specific angels God assigned for different kinds of healing. When you know which angel to call on, your prayer becomes much more powerful.</li>
+        <li><strong>The Prayer of the Pool of Siloam</strong> — the same invocation Jesus used to heal the man blind from birth, reconstructed from the original Koine Greek manuscripts.</li>
+        <li><strong>The Bethesda Fast</strong> — a 7-day fasting protocol that prepares your body and spirit to receive divine healing. It's not required, but it strengthens both body and spirit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 7 (white) - Pricing -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>I'm Covering Most of the Cost So You Can Get Access</h2>
+      <p>I know you might be thinking: "How much is this going to cost?" Let me explain something first.</p>
+      <p>Each copy of The Secret of Healing costs $97 to produce.</p>
+      <p>That includes the secure server costs to keep this material available 24 hours a day, the encrypted digital delivery platform, and the spiritual support we offer every person who receives these prayers.</p>
+      <p>But I don't want money to be the thing standing between you and the healing God prepared for your life.</p>
+      <p>So my team and I decided to cover $50 of the cost of each copy.</p>
+      <p>That means you won't pay $97.</p>
+      <div class="price-section">
+        <span class="price-old">$97</span>
+        <span class="price-new">$47</span>
+      </div>
+      <p>That's less than a doctor visit. Less than a blood test. Less than a bottle of medicine that only masks the symptoms.</p>
+      <p>This small contribution is enough to keep this mission alive—and make sure this knowledge keeps reaching people who desperately need healing.</p>
+      <p>Carlo Acutis believed God wants to heal His children. All of them. No exceptions.</p>
+      <p>And we're willing to invest out of our own pocket to make that happen.</p>
+    </div>
+  </div>
+
+  <!-- Section 8 (dark) - CTA -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>Your Healing Angel Is Waiting</h2>
+      <p>Think about the person who came to mind at the start of this page.</p>
+      <p>It could be you. It could be your mom, your dad, your child, your spouse—someone who's suffering. Someone who needs a miracle.</p>
+      <p>The healing angel has already been assigned to that person. He's just waiting to be called the right way.</p>
+      <p>The Bethesda Protocol will show you exactly how to do that.</p>
+      <p>Click the button below that says "YES! I Want the Bethesda Protocol" and add this sacred guide to your order right now.</p>
+      <p>The same 60-day guarantee applies. If you don't feel the presence of the healing angel in your life, if no improvement happens, I'll refund every cent.</p>
+      <p>But I don't believe that'll be necessary.</p>
+      <p>Because the same God who stirred the waters of Bethesda is still moving today. And He wants to heal you.</p>
+      <p>Click the button below now.</p>
+      <div class="cta-section">
+        <button class="cta-accept" data-nexfy-accept>YES! I WANT THE BETHESDA PROTOCOL — $47</button>
+        <button class="cta-decline" data-nexfy-decline>NO, THANKS. I DON'T NEED THE HEALING PRAYERS</button>
+      </div>
+      <div class="guarantee">60-Day Money-Back Guarantee — No Questions Asked</div>
+    </div>
+  </div>
+
+  <!-- Section 9 (white) - Testimonial -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/120?img=47" alt="Monica" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">The Doctors Said It Was Impossible</div>
+          <div class="testimonial__name">Monica</div>
+          <div class="testimonial__text">Monica had fibromyalgia for 8 years. Constant pain all over her body. Sleepless nights. Meds that stopped working.<br><br>She got the Bethesda Protocol and started using the chronic pain prayer, along with the anointing ritual.<br><br>On the 10th day, she woke up with no pain.<br><br>She wrote me saying…<br><br><em>"Mark, I forgot what it felt like to live without pain. I cried all morning—not out of sadness, but out of gratitude. My angel healed me."</em></div>
+        </div>
+      </div>
+      <div class="cta-section">
+        <button class="cta-accept" data-nexfy-accept>YES! I WANT THE BETHESDA PROTOCOL — $47</button>
+        <button class="cta-decline" data-nexfy-decline>NO, THANKS. I DON'T NEED THE HEALING PRAYERS</button>
+      </div>
+      <div class="guarantee">60-Day Money-Back Guarantee — No Questions Asked</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" async defer></script>
+  <script src="https://www.rubuspay.com/upsell-widget.js" defer></script>
+  <script>
+    (function() {
+      history.pushState(null, '', location.href);
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', function() {
+        history.pushState(null, '', location.href);
+      });
+    })();
+  </script>
+
+</body>
+</html>

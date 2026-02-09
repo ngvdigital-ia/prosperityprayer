@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David's Shield</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .warning-banner {
+      background: linear-gradient(90deg, #b91c1c, #dc2626);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      line-height: 1.5;
+    }
+
+    .section { padding: 48px 24px; }
+    .section--alt {
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+    .section--alt h1,
+    .section--alt h2 {
+      color: #000000;
+    }
+    .section--alt .subtitle {
+      color: #666666;
+    }
+    .section--alt .testimonial {
+      border-color: rgba(0,0,0,0.15);
+    }
+    .section--alt .testimonial__text {
+      color: rgba(0,0,0,0.75);
+    }
+    .section--alt .testimonial__title {
+      color: #000000;
+    }
+    .section--alt .benefits-list li::before {
+      color: #16a34a;
+    }
+    .section--alt .guarantee {
+      color: rgba(0,0,0,0.5);
+    }
+    .section__inner { max-width: 780px; margin: 0 auto; }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 24px; text-align: center; }
+    h2 { font-size: 26px; font-weight: 700; line-height: 1.35; margin-bottom: 20px; }
+    p { margin-bottom: 20px; }
+
+    .subtitle { text-align: center; color: #999999; font-size: 16px; margin-bottom: 32px; }
+
+    .benefits-list { list-style: none; padding: 0; margin: 24px 0; }
+    .benefits-list li { padding: 12px 0 12px 36px; position: relative; line-height: 1.6; }
+    .benefits-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .testimonial {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .testimonial__avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .testimonial__content { flex: 1; }
+    .testimonial__name { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+    .testimonial__title { font-weight: 700; font-size: 18px; margin-bottom: 16px; text-transform: uppercase; }
+    .testimonial__text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.85); font-style: italic; }
+
+    .cta-section { text-align: center; padding: 40px 0 16px; }
+    .cta-accept {
+      display: block;
+      width: 100%;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #15803d, #16a34a);
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(34,197,94,0.35), 0 0 60px rgba(34,197,94,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+      font-family: inherit;
+    }
+    .cta-accept:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(34,197,94,0.5), 0 0 80px rgba(34,197,94,0.2);
+    }
+    .cta-decline {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px;
+      background: none;
+      border: none;
+      color: #999999;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: inherit;
+    }
+    .cta-decline:hover { color: #cccccc; }
+
+    .guarantee { text-align: center; padding: 16px 0; color: rgba(255,255,255,0.6); font-size: 14px; }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      h1 { font-size: 26px; }
+      h2 { font-size: 22px; }
+      .section { padding: 32px 16px; }
+      .cta-accept { font-size: 18px; padding: 18px 24px; }
+      .testimonial { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .warning-banner { font-size: 13px; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="warning-banner">
+    Your purchase is still being finalized. DO NOT close this page.
+  </div>
+
+  <!-- Section 1 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h1>YOU'RE ALMOST THERE!</h1>
+      <p class="subtitle">You're already in the top 5% who made it to the end. That says a lot about you.</p>
+      <p>But before we wrap this up, I need to ask you a question that might sound a little weird…</p>
+      <p><strong>Have you ever felt like something is coming after you?</strong></p>
+      <p>I'm not talking about people. I'm talking about something you can't see—but you can feel.</p>
+      <p>That string of bad things happening one after another. That heavy feeling when you walk into your home. That fear that shows up out of nowhere, with no explanation. That sense that no matter what you do, something is working against you.</p>
+      <p>If you know what I mean, what I'm about to tell you could be the protection you've been needing.</p>
+    </div>
+  </div>
+
+  <!-- Section 2 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>The Question I Asked a Rabbi in Jerusalem</h2>
+      <p>A few years ago, I had the chance to visit Israel.</p>
+      <p>It wasn't a tourist trip. I was looking for answers.</p>
+      <p>One afternoon in Jerusalem, I was introduced to a rabbi named Yosef Ben Haim. He was over 80 years old—white beard, eyes that felt like they could see right through you.</p>
+      <p>He was known as one of the last living scholars who still had access to the original texts of the Old Testament war prayers.</p>
+      <p>I asked him: "Rabbi, how does Israel—a country so small, surrounded by enemies on all sides—manage to win all these wars?"</p>
+      <p>He smiled and said: "You think it's just because of tanks and weapons?"</p>
+      <p>I stayed quiet.</p>
+      <p>Then he continued: "Every Israeli soldier, before going into battle, recites a prayer. The same prayer King David recited before facing his enemies. We never stopped doing it. And that's why we never lose."</p>
+    </div>
+  </div>
+
+  <!-- Section 3 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>Israel's Angelic Shield</h2>
+      <p>What Rabbi Yosef told me that afternoon completely changed how I see spiritual protection.</p>
+      <p>David wasn't a trained warrior when he faced Goliath. He was a shepherd. A teenager. No armor, no sword, no battle experience.</p>
+      <p>And still… he took down a giant who terrified entire armies.</p>
+      <p>Why?</p>
+      <p>Because before he picked up those five stones, David did something nobody notices.</p>
+      <p>He prayed.</p>
+      <p>And it wasn't just any prayer. It was a specific protection invocation—a prayer he learned from his father, Jesse, who learned it from his ancestors, in a line that went straight back to Abraham.</p>
+      <p>Rabbi Yosef explained that this prayer created what the ancients called an "angelic shield"—an invisible barrier no enemy, physical or spiritual, could break through.</p>
+      <p>David used this prayer his whole life.</p>
+      <p>When Saul tried to kill him with a spear, he missed.</p>
+      <p>When armies chased him down, he escaped.</p>
+      <p>When his own children turned against him, he survived.</p>
+      <p>David made a lot of mistakes in his life. But one thing he never stopped doing: reciting the protection prayer every morning, before sunrise.</p>
+      <p>And he died old, in peace, in his own bed.</p>
+      <p>How many kings in ancient times can say that?</p>
+    </div>
+  </div>
+
+  <!-- Section 4 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>Why You Need This Protection Right Now</h2>
+      <p>Let me explain something that maybe nobody ever told you.</p>
+      <p>When you start going after prosperity and healing through prayer, you become a target.</p>
+      <p>I'm not trying to scare you. I'm preparing you.</p>
+      <p>It's like turning on a light in the middle of the dark. You become visible.</p>
+      <p>Forces that were ignoring you start paying attention. And they don't want you reaching what God has prepared for you.</p>
+      <p>You've probably noticed this in your own life.</p>
+      <p>Every time something good is about to happen, a problem pops up out of nowhere. A fight. An illness. An accident. Bad news.</p>
+      <p>That's not a coincidence.</p>
+      <p>It's an attack.</p>
+      <p>And the only way to protect yourself is to do what David did. What Israel's soldiers still do today.</p>
+      <p>Raise the shield before you step into battle.</p>
+    </div>
+  </div>
+
+  <!-- Section 5 (white) -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>What Rabbi Yosef Gave Me Before I Left</h2>
+      <p>On my last night in Jerusalem, Rabbi Yosef called me in for a private conversation.</p>
+      <p>He said: "Mark, you came a long way looking for knowledge. I'm going to give you something I don't give to just anyone."</p>
+      <p>He pulled a yellowed piece of paper from a drawer, handwritten in Hebrew.</p>
+      <p>"This is the Prayer of David's Shield. The same one he recited. The same one our soldiers recite. I translated it into English so you can use it."</p>
+      <p>I asked him why he was giving it to me.</p>
+      <p>He said: "Because you're going to need it. And because you're going to share it with others who need it too. That's what God wants."</p>
+      <p>I kept that paper like it was treasure.</p>
+      <p>And in the years that followed, every time I faced a hard situation—a threat, a moment of danger—I recited that prayer.</p>
+      <p>And I can tell you, with zero doubt: it works.</p>
+    </div>
+  </div>
+
+  <!-- Section 6 (dark) -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>The Night I Should've Died</h2>
+      <p>I've never told this story publicly.</p>
+      <p>A few years ago, I was driving home after a recording that ran late. It was almost midnight. The road was empty.</p>
+      <p>Out of nowhere, a truck crossed into my lane—coming straight at me.</p>
+      <p>I didn't have time to think. I didn't have time to react.</p>
+      <p>But that morning, like I do every day, I had recited the Prayer of David's Shield.</p>
+      <p>What happened next makes no logical sense.</p>
+      <p>The truck swerved at the last second. It passed so close I felt the wind. My car didn't even get scratched.</p>
+      <p>When I pulled over to the shoulder, my hands were shaking. I knew I should've been dead.</p>
+      <p>But I was protected.</p>
+      <p>And in that moment, I understood what Rabbi Yosef meant when he said: "David's shield doesn't fail."</p>
+    </div>
+  </div>
+
+  <!-- Section 7 (white) - Benefits -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>What I Want to Give You Now</h2>
+      <p>I put everything I learned about spiritual protection from Rabbi Yosef into a guide I call <strong>"David's Shield."</strong> The prayer that has protected the nation of Israel for <strong>3,000 years</strong>!</p>
+      <p>It's not a long book. It's not a complicated course.</p>
+      <p>It's a straight-to-the-point, practical manual you can start using tonight.</p>
+      <p>Here's what you'll get access to:</p>
+      <ul class="benefits-list">
+        <li><strong>The original prayer of King David</strong>, translated from ancient Hebrew, with the exact pronunciation of every sacred word. You don't need to know Hebrew—I include everything phonetically.</li>
+        <li><strong>The shield activation ritual.</strong> It's just 3 simple steps you do before reciting the prayer. Without it, the prayer works. With it, it becomes impenetrable.</li>
+        <li><strong>The 4 times of day when the shield is strongest.</strong> Rabbi Yosef explained there are "protection windows" throughout the day. When you pray during these moments, the shield lasts longer.</li>
+        <li><strong>The protection prayer for your family.</strong> David didn't only protect himself—he covered his home, his children, his wife. This prayer extends the shield over everyone you love.</li>
+        <li><strong>What to do when you feel like you're under attack.</strong> Signs that something is trying to hit you—and the emergency prayer that closes any opening immediately.</li>
+        <li><strong>Rabbi Yosef's blessing.</strong> Before I left, he prayed over me and taught me the prayer. I include the exact words so you can receive the same blessing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 8 (dark) - Pricing -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>Why I'm Charging So Little For This</h2>
+      <p>I could charge hundreds of dollars for this knowledge.</p>
+      <p>People travel to Israel and spend thousands just to get an audience with rabbis like Yosef Ben Haim—and most come back without learning any of this.</p>
+      <p>But I promised the Rabbi I would share it.</p>
+      <p>And I don't want money to be the reason someone stays unprotected.</p>
+      <p>That's why David's Shield is available right now for just <strong>$27</strong>. It's a symbolic amount to cover server costs and the support team that will help you.</p>
+      <p><strong>$27</strong> to protect you, your family, your home, your future.</p>
+      <p>That's less than what you spend on dinner. Less than a tank of gas. Less than a streaming subscription you forget to cancel.</p>
+      <p>But it's enough to keep this mission running—and bring protection to more people who need it.</p>
+    </div>
+  </div>
+
+  <!-- Section 9 (white) - Decision CTA -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <h2>Your Decision Right Now</h2>
+      <p>You got the prayer to reconnect with your guardian angel.</p>
+      <p>You have access to prosperity and healing.</p>
+      <p>But without protection, all of that is vulnerable.</p>
+      <p>It's like building a house and leaving the door wide open.</p>
+      <p>David's Shield is the lock. It's the wall. It's what makes sure no enemy can steal what God is giving you.</p>
+      <p>Click the button below and add David's Shield to your order now.</p>
+      <p>The same 60-day guarantee applies. If you don't feel protected, if you don't notice a difference, I'll refund every cent.</p>
+      <p>But I know you'll feel it.</p>
+      <p>Because this prayer protected kings, protected soldiers, protected entire nations.</p>
+      <p>And now it's going to protect you.</p>
+      <div class="cta-section">
+        <button class="cta-accept" data-nexfy-accept>YES! I WANT DAVID'S SHIELD — $27</button>
+        <button class="cta-decline" data-nexfy-decline>NO, THANKS. I'LL STAY WITHOUT PROTECTION</button>
+      </div>
+      <div class="guarantee">60-Day Money-Back Guarantee — No Questions Asked</div>
+    </div>
+  </div>
+
+  <!-- Section 10 (dark) - Testimonials -->
+  <div class="section">
+    <div class="section__inner">
+      <h2>What People Like You Are Saying</h2>
+
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/120?img=11" alt="Michael" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">Three Miracles at Once!</div>
+          <div class="testimonial__name">Michael</div>
+          <div class="testimonial__text">"I was skeptical. But in the first week using the Shield Prayer, three situations that could've gone really bad just… worked themselves out. A case that had been chasing me for two years got dropped out of nowhere. My doctor called saying a test that looked scary came back negative on the retest. And my son—who'd been running with the wrong crowd—suddenly decided to come back home. Coincidence? I don't believe in coincidences anymore."</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/120?img=32" alt="Sarah" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">The Energy in My Home Changed!</div>
+          <div class="testimonial__name">Sarah</div>
+          <div class="testimonial__text">"My house always felt heavy. Constant fighting, insomnia, that feeling like I was being watched. I started reciting the family protection prayer every morning. In less than two weeks, my husband said, 'Have you noticed the house feels different?' I did. Peace came back. My kids are sleeping better. I'm sleeping better. Whatever was here left."</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="imagens/foto_homem_50.jpg" alt="David" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">No Accidents on the Road!</div>
+          <div class="testimonial__name">David</div>
+          <div class="testimonial__text">"I work as a truck driver. The road is dangerous. I've seen things I wouldn't wish on anyone. Since I started using David's Shield before every trip, I haven't had a single incident. No close calls, no flat tires, nothing. My coworkers ask what my secret is. I tell them: divine protection. They laugh. But I know what I know."</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="imagens/foto_mulher_40.webp" alt="Jennifer" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">My Daughter's Depression Disappeared!</div>
+          <div class="testimonial__name">Jennifer</div>
+          <div class="testimonial__text">"My sixteen-year-old daughter was going through a really hard phase. Depression, dark thoughts, shutting everyone out. I started reciting the family protection prayer every night and including her in it. At first she didn't even know. But little by little, I saw the change. She started smiling again. Talking to me again. Last week she told me, 'Mom, that darkness I felt is gone.' I cried. The shield works."</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="imagens/foto_homem_40.jpg" alt="Robert" class="testimonial__avatar">
+        <div class="testimonial__content">
+          <div class="testimonial__title">The Peace That Changed My Life!</div>
+          <div class="testimonial__name">Robert</div>
+          <div class="testimonial__text">"After using the shield prayer for a month, I had a dream. A man in golden armor was standing at my bedroom door. He didn't say anything. He just stood there, guarding. When I woke up, I felt a peace I hadn't felt in years. Now I know I'm not alone. I never was."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 11 (white) - Final CTA -->
+  <div class="section section--alt">
+    <div class="section__inner">
+      <div class="cta-section">
+        <button class="cta-accept" data-nexfy-accept>YES! I WANT DAVID'S SHIELD — $27</button>
+        <button class="cta-decline" data-nexfy-decline>NO, THANKS. I'LL STAY WITHOUT PROTECTION</button>
+      </div>
+      <div class="guarantee">60-Day Money-Back Guarantee — No Questions Asked</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" async defer></script>
+  <script src="https://www.rubuspay.com/upsell-widget.js" defer></script>
+  <script>
+    (function() {
+      history.pushState(null, '', location.href);
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', function() {
+        history.pushState(null, '', location.href);
+      });
+    })();
+  </script>
+
+</body>
+</html>
