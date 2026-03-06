@@ -38,25 +38,34 @@ body{font-family:'Roboto',sans-serif;background:#000;min-height:100vh;color:#fff
 .text .date-highlight{color:#dc143c;font-weight:700}
 .live-status{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 20px;color:#fff;font-size:16px;font-weight:600;background:linear-gradient(135deg,#dc143c 0%,#b71c1c 50%,#8b0000 100%);border-radius:25px;margin-bottom:15px;box-shadow:0 4px 15px rgba(220,20,60,.4)}
 .live-dot{width:10px;height:10px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
-.video-container{width:100%;max-width:900px;position:relative;background:transparent;aspect-ratio:16/9;margin-bottom:15px}
+.video-container{width:100%;max-width:900px;position:relative;background:#000;overflow:hidden;z-index:1}
+.video-container vturb-smartplayer{display:block;width:100%;position:relative;z-index:1}
 .whatsapp-button{display:none;justify-content:center;align-items:center;background:linear-gradient(135deg,#25d366,#128c7e);width:60px;height:60px;border-radius:50%;box-shadow:0 4px 15px rgba(37,211,102,.4);cursor:pointer;position:fixed;bottom:20px;right:20px;transition:all .3s ease;z-index:100;border:none}
 .whatsapp-button:hover{transform:scale(1.1);box-shadow:0 8px 25px rgba(37,211,102,.6)}
 .whatsapp-icon{width:35px;height:35px}
 
-/* Comments Section */
-.comments-section{width:100%;max-width:900px;margin:20px auto 0;padding:0 15px}
-.comments-section h3{font-size:16px;color:#fff;margin-bottom:15px;font-weight:700}
-.comment{display:flex;gap:10px;margin-bottom:16px}
-.comment-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff}
-.comment-body{flex:1}
-.comment-author{font-weight:700;font-size:13px;color:#fff;margin-bottom:2px}
-.comment-text{font-size:13px;color:#ccc;line-height:1.4}
-.comment-meta{font-size:11px;color:#888;margin-top:4px;display:flex;gap:12px;align-items:center}
-.comment-meta span{cursor:pointer}
-.comment-likes{color:#888}
-.comment-reply{margin-left:46px;margin-top:8px}
+/* Facebook-style Comments Section */
+.comments-section{width:100%;max-width:900px;margin:0 auto;padding:20px 15px;background:#fff;position:relative;z-index:2}
+.comment{display:flex;gap:8px;margin-bottom:12px}
+.comment-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;object-fit:cover}
+.comment-content{flex:1}
+.comment-bubble{background:#f0f2f5;border-radius:18px;padding:8px 12px;display:inline-block;max-width:100%}
+.comment-author{font-weight:600;font-size:13px;color:#050505;line-height:1.2}
+.comment-text{font-size:15px;color:#050505;line-height:1.3;margin-top:2px;word-wrap:break-word}
+.comment-actions{display:flex;gap:16px;align-items:center;padding:0 12px;margin-top:4px}
+.comment-actions span{font-size:12px;color:#65676b;font-weight:600;cursor:pointer}
+.comment-actions span:hover{text-decoration:underline}
+.comment-actions .time{font-weight:400}
+.comment-actions .likes{display:flex;align-items:center;gap:4px;margin-left:auto;background:#fff;border-radius:10px;padding:2px 6px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.comment-actions .likes img{width:16px;height:16px}
+.comment-reply{margin-left:40px;margin-top:4px}
+.comment-reply .comment-avatar{width:24px;height:24px}
+.comment-reply .comment-bubble{padding:6px 10px}
+.comment-reply .comment-author{font-size:12px}
+.comment-reply .comment-text{font-size:13px}
+.comment-reply .comment-actions span{font-size:11px}
 
-.disclaimer{color:#777;font-size:11px;text-align:center;padding:25px 15px;width:100%;margin-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.disclaimer{color:#65676b;font-size:11px;text-align:center;padding:20px 15px;width:100%;background:#fff;border-top:1px solid #e4e6eb}
 
 @keyframes pulse{0%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
 
@@ -64,19 +73,20 @@ body{font-family:'Roboto',sans-serif;background:#000;min-height:100vh;color:#fff
   .main-wrapper{padding:25px 20px 0}
   .text{font-size:24px;padding:20px 15px}
   .live-status{font-size:18px;padding:12px 25px;margin-bottom:20px}
-  .video-container{margin-bottom:20px}
-  .comments-section{padding:0 20px}
-  .comment-avatar{width:40px;height:40px;font-size:15px}
-  .comment-author{font-size:14px}
-  .comment-text{font-size:14px}
-  .comment-reply{margin-left:50px}
+  .comments-section{padding:25px 20px}
+  .comment-avatar{width:40px;height:40px}
+  .comment-author{font-size:13px}
+  .comment-text{font-size:15px}
+  .comment-reply{margin-left:48px}
+  .comment-reply .comment-avatar{width:28px;height:28px}
 }
 
 @media screen and (max-width:380px){
   .text{font-size:17px;padding:12px 8px}
   .live-status{font-size:13px;padding:8px 14px;gap:6px}
   .live-dot{width:8px;height:8px}
-  .comment-avatar{width:32px;height:32px;font-size:12px}
+  .comment-avatar{width:28px;height:28px}
+  .comment-text{font-size:14px}
 }
 </style>
 </head>
@@ -90,7 +100,7 @@ body{font-family:'Roboto',sans-serif;background:#000;min-height:100vh;color:#fff
         <span id="numero-pessoas">27843 people are watching now!</span>
     </div>
     <div class="video-container" id="video-container">
-        <vturb-smartplayer id="ab-6917abfbd1f522b62fe02e6d" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
+        <vturb-smartplayer id="ab-6917abfbd1f522b62fe02e6d" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
         <script type="text/javascript">
             var s=document.createElement("script");
             s.src="https://scripts.converteai.net/00c3b583-8874-4e64-a32e-65f6dd9ba521/ab-test/6917abfbd1f522b62fe02e6d/player.js";
@@ -107,83 +117,146 @@ body{font-family:'Roboto',sans-serif;background:#000;min-height:100vh;color:#fff
 
 <div class="comments-section">
     <div class="comment">
-        <div class="comment-avatar" style="background:#4a7fb5;">RL</div>
-        <div class="comment-body">
-            <div class="comment-author">Rebecca Lawson</div>
-            <div class="comment-text">After listening to the chants, my life took a turn I never thought possible. My debts were cleared in unexpected ways, and today I live with a sense of abundance I could never have imagined. Saint Michael the Archangel has been my protector through every battle.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 2</span> <span>2 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=1" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Rebecca Lawson</div>
+                <div class="comment-text">After listening to the chants, my life took a turn I never thought possible. My debts were cleared in unexpected ways, and today I live with a sense of abundance I could never have imagined. Saint Michael the Archangel has been my protector through every battle.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">2m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">2</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#e67e22;">LB</div>
-        <div class="comment-body">
-            <div class="comment-author">Laura Bennett</div>
-            <div class="comment-text">I didn't know how to overcome the financial struggles that were suffocating me, but once I reconnected with my angel, I felt an immense peace, and soon the solutions began to appear. I am certain that Saint Michael guided me onto this path.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 3</span> <span>3 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=5" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Laura Bennett</div>
+                <div class="comment-text">I didn't know how to overcome the financial struggles that were suffocating me, but once I reconnected with my angel, I felt an immense peace, and soon the solutions began to appear. I am certain that Saint Michael guided me onto this path.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">3m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">3</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#9b59b6;">RS</div>
-        <div class="comment-body">
-            <div class="comment-author">Rachel Stein</div>
-            <div class="comment-text">I was at rock bottom, but these chants changed everything. In less than a month, I was able to pay off my debts, reorganize my life, and at last, I felt a true sense of purpose.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 3</span> <span>5 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=9" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Rachel Stein</div>
+                <div class="comment-text">I was at rock bottom, but these chants changed everything. In less than a month, I was able to pay off my debts, reorganize my life, and at last, I felt a true sense of purpose.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">5m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">3</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#2ecc71;">MR</div>
-        <div class="comment-body">
-            <div class="comment-author">Michael Robinson</div>
-            <div class="comment-text">I woke up from a dream with Saint Michael the archangel and, on that very same day, I received the news of an incredible opportunity at work. Since then, everything has flowed so naturally that I can only be grateful.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 5</span> <span>10 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=12" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Michael Robinson</div>
+                <div class="comment-text">I woke up from a dream with Saint Michael the archangel and, on that very same day, I received the news of an incredible opportunity at work. Since then, everything has flowed so naturally that I can only be grateful.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">10m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">5</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#e74c3c;">KD</div>
-        <div class="comment-body">
-            <div class="comment-author">Karen Douglas</div>
-            <div class="comment-text">I have no words to describe what I felt when I first heard the chants. My business, which was on the verge of collapsing, is now thriving like never before. I truly feel my life has been blessed in a supernatural way.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 12</span> <span>1 h</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=16" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Karen Douglas</div>
+                <div class="comment-text">I have no words to describe what I felt when I first heard the chants. My business, which was on the verge of collapsing, is now thriving like never before. I truly feel my life has been blessed in a supernatural way.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">1h</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">12</div>
+            </div>
         </div>
     </div>
 
     <div class="comment comment-reply">
-        <div class="comment-avatar" style="background:#1abc9c;font-size:12px;">EC</div>
-        <div class="comment-body">
-            <div class="comment-author">Emily Carter</div>
-            <div class="comment-text">Yes Karen, my life changed after I listened too. I even dreamed of numbers and won money in the lottery... I couldn't believe it.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 8</span> <span>58 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=20" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Emily Carter</div>
+                <div class="comment-text">Yes Karen, my life changed after I listened too. I even dreamed of numbers and won money in the lottery... I couldn't believe it.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">58m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">8</div>
+            </div>
         </div>
     </div>
 
     <div class="comment comment-reply">
-        <div class="comment-avatar" style="background:#e74c3c;font-size:12px;">KD</div>
-        <div class="comment-body">
-            <div class="comment-author">Karen Douglas</div>
-            <div class="comment-text">Thats wonderful Emily good fortune for both of us!!</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 6</span> <span>52 m</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=16" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Karen Douglas</div>
+                <div class="comment-text">Thats wonderful Emily good fortune for both of us!!</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">52m</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">6</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#f39c12;">JM</div>
-        <div class="comment-body">
-            <div class="comment-author">Jessica Morgan</div>
-            <div class="comment-text">The most surprising thing was how quickly everything changed. I reconnected with my life's purpose and, as a result, I achieved goals that once felt impossible. My gratitude is beyond words.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 27</span> <span>1 h</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=25" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Jessica Morgan</div>
+                <div class="comment-text">The most surprising thing was how quickly everything changed. I reconnected with my life's purpose and, as a result, I achieved goals that once felt impossible. My gratitude is beyond words.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">1h</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">27</div>
+            </div>
         </div>
     </div>
 
     <div class="comment">
-        <div class="comment-avatar" style="background:#3498db;">JP</div>
-        <div class="comment-body">
-            <div class="comment-author">Jonathan Price</div>
-            <div class="comment-text">I've always worked hard, but I never seemed to move forward. After listening to the chants, opportunities started to appear and, for the first time, I was able to save money and fulfill long held dreams.</div>
-            <div class="comment-meta"><span>Like</span> <span>Reply</span> <span class="comment-likes">&#128077; 30</span> <span>1 h</span></div>
+        <img class="comment-avatar" src="https://i.pravatar.cc/100?img=33" alt="">
+        <div class="comment-content">
+            <div class="comment-bubble">
+                <div class="comment-author">Jonathan Price</div>
+                <div class="comment-text">I've always worked hard, but I never seemed to move forward. After listening to the chants, opportunities started to appear and, for the first time, I was able to save money and fulfill long held dreams.</div>
+            </div>
+            <div class="comment-actions">
+                <span>Like</span>
+                <span>Reply</span>
+                <span class="time">1h</span>
+                <div class="likes"><img src="https://em-content.zobj.net/source/facebook/355/thumbs-up_1f44d.png" alt="">30</div>
+            </div>
         </div>
     </div>
 </div>
